@@ -50,7 +50,7 @@ function Homepage() {
               <li>✅ Customer relationship tools</li>
               <li>✅ Marketing automation</li>
             </ul>
-            <Link to="/seller">
+            <Link to="/login" state={{ from: "/seller" }}>
               <button style={{
                 marginTop: "15px",
                 padding: "10px 15px",
