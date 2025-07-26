@@ -1,21 +1,19 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function SellerPage() {
-  const [products, setProducts] = useState([
+  const [products] = useState([
     { id: 1, name: "Burger Bun", stock: 50 },
     { id: 2, name: "Cheese Slices", stock: 30 },
   ]);
-
   const [orders, setOrders] = useState([
     { id: 101, item: "Burger Bun", status: "Pending" },
     { id: 102, item: "Cheese Slices", status: "Shipped" },
   ]);
-
   const [vendors] = useState([
     { id: 1, name: "Street Food Hub", location: "T. Nagar" },
     { id: 2, name: "Quick Bites", location: "Anna Nagar" },
   ]);
-
   const salesAnalytics = {
     totalSales: 1200,
     bestSelling: "Burger Bun",
@@ -30,40 +28,47 @@ function SellerPage() {
   };
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.header}>👨‍💼 Seller Dashboard</h1>
-      <p style={styles.subtext}>
-        Welcome, Seller! Manage your products, orders, and check analytics here.
-      </p>
+    <div style={styles.page}>
+      {/* Navbar */}
+      <nav style={styles.navbar}>
+        <div style={styles.logo}>📊 Seller Dashboard</div>
+        <div style={styles.authButtons}>
+          <Link to="/login" style={{ textDecoration: 'none' }}>
+            <button style={styles.authBtn}>Login</button>
+          </Link>
+          <Link to="/register" style={{ textDecoration: 'none' }}>
+            <button style={{ ...styles.authBtn, backgroundColor: '#4CAF50' }}>Register</button>
+          </Link>
+        </div>
+      </nav>
+
+      <header style={styles.header}>
+        <h1>Welcome Seller! 🛍️</h1>
+        <p>Manage your products, orders, vendors and sales data.</p>
+      </header>
 
       {/* Product Management */}
-      <div style={styles.card}>
-        <h2>📦 Product Management</h2>
-        <div style={styles.buttonGroup}>
-          <button style={styles.button}>Add Product</button>
-          <button style={styles.button}>Edit Product</button>
-          <button style={styles.button}>Delete Product</button>
-          <button style={styles.button}>Bulk Upload CSV</button>
-        </div>
-        <ul>
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>📦 Products</h2>
+        <div style={styles.grid}>
           {products.map(product => (
-            <li key={product.id} style={styles.listItem}>
-              {product.name} - Stock: {product.stock}
-              <button style={{ ...styles.button, marginLeft: "10px" }}>
-                Set Daily Stock
-              </button>
-            </li>
+            <div key={product.id} style={styles.card}>
+              <h3 style={styles.cardTitle}>{product.name}</h3>
+              <p style={styles.detail}>Stock: {product.stock}</p>
+              <button style={styles.button}>Set Daily Stock</button>
+            </div>
           ))}
-        </ul>
-      </div>
+        </div>
+      </section>
 
-      {/* Order Dashboard */}
-      <div style={styles.card}>
-        <h2>📋 Order Dashboard</h2>
-        <ul>
+      {/* Orders */}
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>📋 Orders</h2>
+        <div style={styles.grid}>
           {orders.map(order => (
-            <li key={order.id} style={styles.listItem}>
-              Order #{order.id} - {order.item} - Status: {order.status}
+            <div key={order.id} style={styles.card}>
+              <h3 style={styles.cardTitle}>#{order.id} - {order.item}</h3>
+              <p style={styles.detail}>Status: {order.status}</p>
               <select
                 value={order.status}
                 onChange={e => updateOrderStatus(order.id, e.target.value)}
@@ -74,86 +79,122 @@ function SellerPage() {
                 <option>Shipped</option>
                 <option>Delivered</option>
               </select>
-            </li>
+            </div>
           ))}
-        </ul>
-      </div>
+        </div>
+      </section>
 
       {/* Analytics */}
-      <div style={styles.card}>
-        <h2>📊 Analytics</h2>
-        <p>Total Sales: ₹{salesAnalytics.totalSales}</p>
-        <p>Best Selling Product: {salesAnalytics.bestSelling}</p>
-        <p>Average Daily Orders: {salesAnalytics.dailyOrders}</p>
-      </div>
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>📈 Analytics</h2>
+        <div style={styles.grid}>
+          <div style={styles.card}>
+            <p>Total Sales: ₹{salesAnalytics.totalSales}</p>
+            <p>Best Selling: {salesAnalytics.bestSelling}</p>
+            <p>Daily Orders: {salesAnalytics.dailyOrders}</p>
+          </div>
+        </div>
+      </section>
 
-      {/* Nearby Vendors */}
-      <div style={styles.card}>
-        <h2>🧑‍🍳 Nearby Vendors</h2>
-        <ul>
+      {/* Vendors */}
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>🏪 Nearby Vendors</h2>
+        <div style={styles.grid}>
           {vendors.map(v => (
-            <li key={v.id} style={styles.listItem}>
-              {v.name} - {v.location}
-            </li>
+            <div key={v.id} style={styles.card}>
+              <h3 style={styles.cardTitle}>{v.name}</h3>
+              <p style={styles.detail}>{v.location}</p>
+            </div>
           ))}
-        </ul>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
 
 const styles = {
-  container: {
-    padding: "40px",
-    fontFamily: "Segoe UI, sans-serif",
+  page: {
+    fontFamily: "'Segoe UI', sans-serif",
     backgroundColor: "#f4f6f8",
-  },
-  header: {
-    fontSize: "2.5em",
-    marginBottom: "10px",
     color: "#333",
+    minHeight: "100vh",
   },
-  subtext: {
-    fontSize: "1.1em",
-    color: "#666",
-  },
-  card: {
-    backgroundColor: "#fff",
-    padding: "25px",
-    marginTop: "30px",
-    borderRadius: "12px",
-    boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease",
-  },
-  buttonGroup: {
-    marginBottom: "15px",
-  },
-  button: {
-    backgroundColor: "#007bff",
+  navbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "15px 30px",
+    backgroundColor: "#1f2937",
     color: "white",
+  },
+  logo: {
+    fontSize: "1.4rem",
+    fontWeight: "bold",
+  },
+  authButtons: {
+    display: "flex",
+    gap: "10px",
+  },
+  authBtn: {
+    backgroundColor: "#3b82f6",
     border: "none",
     padding: "8px 14px",
-    marginRight: "10px",
+    borderRadius: "6px",
+    color: "#fff",
+    cursor: "pointer",
+    fontWeight: "500",
+  },
+  header: {
+    textAlign: "center",
+    padding: "40px 20px 20px",
+    background: "linear-gradient(to right, #e0f2fe, #f8fafc)",
+  },
+  section: {
+    padding: "30px 20px",
+  },
+  sectionTitle: {
+    textAlign: "center",
+    fontSize: "1.8rem",
+    marginBottom: "25px",
+  },
+  grid: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    gap: "20px",
+  },
+  card: {
+    width: "220px",
+    padding: "18px",
+    backgroundColor: "#fff",
+    borderRadius: "12px",
+    textAlign: "center",
+    boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
+    border: "1px solid #e0e0e0",
+    transition: "all 0.3s ease-in-out",
+    cursor: "pointer",
+  },
+  cardTitle: {
+    fontSize: "1.2rem",
+    marginBottom: "10px",
+  },
+  detail: {
+    fontSize: "1rem",
+    marginBottom: "8px",
+    color: "#555",
+  },
+  button: {
+    padding: "6px 12px",
+    backgroundColor: "#007bff",
+    color: "#fff",
+    border: "none",
     borderRadius: "6px",
     cursor: "pointer",
-    transition: "background-color 0.2s ease",
-  },
-  listItem: {
-    margin: "8px 0",
-    padding: "6px 0",
-    borderBottom: "1px solid #eee",
   },
   select: {
-    marginLeft: "10px",
-    padding: "5px 10px",
+    padding: "5px",
     borderRadius: "4px",
     border: "1px solid #ccc",
-    backgroundColor: "#fafafa",
-    cursor: "pointer",
   },
 };
-
-// Add hover effect to buttons using JS-in-CSS approach (inline doesn't support :hover well).
-// If you want real hover interaction, consider moving to a separate CSS file or styled-components.
 
 export default SellerPage;
