@@ -6,14 +6,17 @@ function SellerPage() {
     { id: 1, name: "Burger Bun", stock: 50 },
     { id: 2, name: "Cheese Slices", stock: 30 },
   ]);
+
   const [orders, setOrders] = useState([
     { id: 101, item: "Burger Bun", status: "Pending" },
     { id: 102, item: "Cheese Slices", status: "Shipped" },
   ]);
+
   const [vendors] = useState([
     { id: 1, name: "Street Food Hub", location: "T. Nagar" },
     { id: 2, name: "Quick Bites", location: "Anna Nagar" },
   ]);
+
   const salesAnalytics = {
     totalSales: 1200,
     bestSelling: "Burger Bun",
@@ -46,6 +49,30 @@ function SellerPage() {
         <h1>Welcome Seller! 🛍️</h1>
         <p>Manage your products, orders, vendors and sales data.</p>
       </header>
+
+      {/* Seller Profile */}
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>👤 Seller Profile</h2>
+        <div style={styles.profileCard}>
+          <h3 style={styles.profileTitle}>Name: Ramesh Kumar</h3>
+          <p style={styles.profileDetail}>Store: Ramesh Fast Foods</p>
+          <p style={styles.profileDetail}>Location: T. Nagar, Chennai</p>
+          <p style={styles.profileDetail}>Rating: ⭐⭐⭐⭐☆ (4.2/5)</p>
+          <p style={styles.profileDetail}>
+            About: Serving the best street food in Chennai since 2010. Famous for burger buns and cheese-loaded sandwiches.
+          </p>
+          <div>
+            <h4 style={{ marginTop: '15px' }}>🛒 Listed Products:</h4>
+            <ul style={styles.productList}>
+              {products.map(p => (
+                <li key={p.id}>
+                  {p.name} — Stock: {p.stock}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
       {/* Product Management */}
       <section style={styles.section}>
@@ -194,6 +221,30 @@ const styles = {
     padding: "5px",
     borderRadius: "4px",
     border: "1px solid #ccc",
+  },
+  profileCard: {
+    backgroundColor: "#fff",
+    padding: "20px",
+    borderRadius: "12px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+    maxWidth: "600px",
+    margin: "0 auto",
+    textAlign: "left",
+    lineHeight: "1.6",
+  },
+  profileTitle: {
+    fontSize: "1.4rem",
+    fontWeight: "bold",
+    marginBottom: "10px",
+  },
+  profileDetail: {
+    fontSize: "1rem",
+    color: "#555",
+  },
+  productList: {
+    listStyle: "disc",
+    paddingLeft: "20px",
+    color: "#333",
   },
 };
 
