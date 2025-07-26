@@ -2,113 +2,27 @@ import React from 'react';
 
 function Homepage() {
   return (
-    <div className="homepage">
+    <div style={{
+      fontFamily: "Arial, sans-serif",
+      color: "#2c2c2c",
+      padding: "20px",
+      maxWidth: "1200px",
+      margin: "auto"
+    }}>
       <style>{`
-        .homepage {
-          font-family: Arial, sans-serif;
-          color: #2c2c2c;
-          padding: 20px;
-          max-width: 1200px;
-          margin: auto;
-        }
-        .intro {
-          text-align: center;
-          margin-bottom: 40px;
-        }
-        .highlight {
-          color: #913d8a;
-        }
-        .cards {
-          display: flex;
-          justify-content: space-around;
-          flex-wrap: wrap;
-          gap: 20px;
-        }
-        .card {
-          background: #fff;
-          border-radius: 12px;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-          width: 45%;
-          overflow: hidden;
-        }
-        .image {
-          height: 180px;
-          background-size: cover;
-          background-position: center;
-        }
-        .seller-img {
-          background-image: url('/images/seller.png'); /* Update with real path */
-        }
-        .vendor-img {
-          background-image: url('/images/vendor.png'); /* Update with real path */
-        }
-        .content {
-          padding: 20px;
-        }
-        .content ul {
-          list-style: none;
-          padding-left: 0;
-        }
-        .content li {
-          margin: 6px 0;
-        }
-        .btn {
-          margin-top: 15px;
-          padding: 10px 15px;
-          border: none;
-          border-radius: 6px;
-          font-weight: bold;
-          cursor: pointer;
-        }
-        .orange {
-          background-color: #f9a825;
-          color: #fff;
-        }
-        .purple {
-          background-color: #6a1b9a;
-          color: #fff;
-        }
-        .why-choose {
-          text-align: center;
-          margin-top: 60px;
-        }
-        .features {
-          display: flex;
-          justify-content: space-around;
-          flex-wrap: wrap;
-          margin-top: 30px;
-          gap: 20px;
-        }
-        .feature {
-          width: 30%;
-          background: #fff;
-          border-radius: 12px;
-          padding: 20px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .icon-box {
-          font-size: 30px;
-          margin-bottom: 10px;
-        }
-        .orange-icon {
-          color: #f9a825;
-        }
-        .purple-icon {
-          color: #6a1b9a;
-        }
         @media (max-width: 768px) {
-          .cards, .features {
+          .flex-wrap {
             flex-direction: column;
             align-items: center;
           }
           .card, .feature {
-            width: 90%;
+            width: 90% !important;
           }
         }
       `}</style>
 
-      <section className="intro">
-        <h1><span className="highlight">Choose Your Path</span></h1>
+      <section style={{ textAlign: "center", marginBottom: "40px" }}>
+        <h1><span style={{ color: "#913d8a" }}>Choose Your Path</span></h1>
         <p>
           Join our marketplace and start growing your business today.
           Whether you're an established seller or a mobile street vendor,
@@ -116,55 +30,119 @@ function Homepage() {
         </p>
       </section>
 
-      <section className="cards">
-        <div className="card seller">
-          <div className="image seller-img"></div>
-          <div className="content">
+      <section style={{
+        display: "flex",
+        justifyContent: "space-around",
+        flexWrap: "wrap",
+        gap: "20px"
+      }} className="flex-wrap">
+        {/* Seller Card */}
+        <div style={{
+          background: "#fff",
+          borderRadius: "12px",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+          width: "45%",
+          overflow: "hidden"
+        }} className="card">
+          <img src="/images/seller.jpg" alt="Seller" style={{ width: "100%", height: "250px", objectFit: "cover" }} />
+          <div style={{ padding: "20px" }}>
             <h2>Seller</h2>
             <p>Perfect for established businesses looking to expand their online presence with professional tools and analytics.</p>
-            <ul>
+            <ul style={{ listStyle: "none", padding: 0 }}>
               <li>✅ Professional storefront setup</li>
               <li>✅ Advanced inventory management</li>
               <li>✅ Detailed sales analytics</li>
               <li>✅ Customer relationship tools</li>
               <li>✅ Marketing automation</li>
             </ul>
-            <button className="btn orange">Get Started as Seller →</button>
+            <button style={{
+              marginTop: "15px",
+              padding: "10px 15px",
+              border: "none",
+              borderRadius: "6px",
+              fontWeight: "bold",
+              backgroundColor: "#f9a825",
+              color: "#fff",
+              cursor: "pointer"
+            }}>Get Started as Seller →</button>
           </div>
         </div>
 
-        <div className="card vendor">
-          <div className="image vendor-img"></div>
-          <div className="content">
+        {/* Vendor Card */}
+        <div style={{
+          background: "#fff",
+          borderRadius: "12px",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+          width: "45%",
+          overflow: "hidden"
+        }} className="card">
+          <img src="/images/vendor.jpeg" alt="Vendor" style={{ width: "100%", height: "250px", objectFit: "cover" }} />
+          <div style={{ padding: "20px" }}>
             <h2>Street Vendor</h2>
             <p>Ideal for mobile vendors and food trucks wanting to connect with customers and manage orders on the go.</p>
-            <ul>
+            <ul style={{ listStyle: "none", padding: 0 }}>
               <li>✅ Mobile-first design</li>
               <li>✅ Location-based services</li>
               <li>✅ Quick-order processing</li>
               <li>✅ Real-time notifications</li>
               <li>✅ Flexible payment options</li>
             </ul>
-            <button className="btn purple">Get Started as Street Vendor →</button>
+            <button style={{
+              marginTop: "15px",
+              padding: "10px 15px",
+              border: "none",
+              borderRadius: "6px",
+              fontWeight: "bold",
+              backgroundColor: "#6a1b9a",
+              color: "#fff",
+              cursor: "pointer"
+            }}>Get Started as Street Vendor →</button>
           </div>
         </div>
       </section>
 
-      <section className="why-choose">
+      {/* Why Choose Section */}
+      <section style={{ textAlign: "center", marginTop: "60px" }}>
         <h2>Why Choose Our Platform?</h2>
-        <div className="features">
-          <div className="feature">
-            <div className="icon-box orange-icon">⚙️</div>
+        <div style={{
+          display: "flex",
+          justifyContent: "space-around",
+          flexWrap: "wrap",
+          marginTop: "30px",
+          gap: "20px"
+        }} className="flex-wrap">
+          <div style={{
+            width: "30%",
+            background: "#fff",
+            borderRadius: "12px",
+            padding: "20px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
+          }} className="feature">
+            <div style={{ fontSize: "30px", marginBottom: "10px", color: "#f9a825" }}>⚙</div>
             <h3>Fast Setup</h3>
             <p>Get your business online in minutes with our streamlined onboarding process.</p>
           </div>
-          <div className="feature">
-            <div className="icon-box purple-icon">🧰</div>
+
+          <div style={{
+            width: "30%",
+            background: "#fff",
+            borderRadius: "12px",
+            padding: "20px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
+          }} className="feature">
+            <div style={{ fontSize: "30px", marginBottom: "10px", color: "#6a1b9a" }}>🧰</div>
             <h3>Business Tools</h3>
             <p>Access professional tools designed specifically for your business type.</p>
           </div>
-          <div className="feature">
-            <div className="icon-box orange-icon">📈</div>
+
+          <div style={{
+            width: "30%",
+            background: "#fff",
+            borderRadius: "12px",
+            padding: "20px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
+          }} className="feature">
+            <div style={{ fontSize: "30px", marginBottom: "10px", color: "#f9a825" }}>📈</div>
             <h3>Grow Revenue</h3>
             <p>Increase your sales with our proven marketing and customer acquisition tools.</p>
           </div>
