@@ -5,12 +5,13 @@ function Register() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',         // changed from fullName
     phone: '',
     dob: '',
     email: '',
     address: '',
-    role: ''
+    role: '',
+    password: ''      // added password
   });
 
   const handleChange = (e) => {
@@ -38,7 +39,7 @@ function Register() {
         alert("✅ Registered successfully!");
         navigate("/login");
       } else {
-        alert(`❌ Registration failed: ${data.message}`);
+        alert(`Registration failed: ${data.error || data.message}`);
       }
 
     } catch (error) {
@@ -128,26 +129,82 @@ function Register() {
       <h2 style={styles.title}>Create Your Account 📝</h2>
       <form onSubmit={handleRegister}>
         <label style={styles.label}>Full Name</label>
-        <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} required style={styles.input} placeholder="Enter your full name" />
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          style={styles.input}
+          placeholder="Enter your full name"
+        />
 
         <label style={styles.label}>Phone Number</label>
-        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required style={styles.input} placeholder="Enter phone number" />
+        <input
+          type="tel"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+          style={styles.input}
+          placeholder="Enter phone number"
+        />
 
         <label style={styles.label}>Date of Birth</label>
-        <input type="date" name="dob" value={formData.dob} onChange={handleChange} required style={styles.input} />
+        <input
+          type="date"
+          name="dob"
+          value={formData.dob}
+          onChange={handleChange}
+          required
+          style={styles.input}
+        />
 
         <label style={styles.label}>Email Address</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange} required style={styles.input} placeholder="example@email.com" />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          style={styles.input}
+          placeholder="example@email.com"
+        />
 
         <label style={styles.label}>Address</label>
-        <textarea rows="3" name="address" value={formData.address} onChange={handleChange} required style={styles.textarea} placeholder="Enter your address"></textarea>
+        <textarea
+          rows="3"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          required
+          style={styles.textarea}
+          placeholder="Enter your address"
+        ></textarea>
 
         <label style={styles.label}>Registering as</label>
-        <select name="role" value={formData.role} onChange={handleChange} required style={styles.select}>
+        <select
+          name="role"
+          value={formData.role}
+          onChange={handleChange}
+          required
+          style={styles.select}
+        >
           <option value="">Select</option>
           <option value="vendor">Street Vendor</option>
           <option value="seller">Seller</option>
         </select>
+
+        <label style={styles.label}>Password</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          style={styles.input}
+          placeholder="Enter a strong password"
+        />
 
         <button type="submit" style={styles.button}>Submit</button>
       </form>
